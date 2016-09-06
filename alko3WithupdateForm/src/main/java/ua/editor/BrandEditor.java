@@ -16,7 +16,7 @@ public class BrandEditor extends PropertyEditorSupport{
 	
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
-		Brand brand = brandService.findOne(Integer.valueOf(text));
+		Brand brand = brandService.findById(Integer.valueOf(text));
 		setValue(brand);
 	}
 

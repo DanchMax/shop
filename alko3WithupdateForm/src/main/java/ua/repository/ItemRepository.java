@@ -21,9 +21,9 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	@Transactional
 	void deleteById(@Param("id") int id);
 
-	@Query("select p from Item p left join fetch p.category left join fetch p.brand left join fetch p.size left join fetch p.star left join fetch p.perman left join fetch p.aging left join fetch p.country")
+	@Query("select p from Item p left join fetch p.category left join fetch p.brand left join fetch p.size left join fetch p.perman left join fetch p.country")
 	List<Item> items();
 	
-	@Query("select p from Item p left join fetch p.category left join fetch p.brand left join fetch p.size left join fetch p.star left join fetch p.perman left join fetch p.aging left join fetch p.country where p.id=:id")
+	@Query("select p from Item p left join fetch p.category left join fetch p.brand left join fetch p.size left join fetch p.perman left join fetch p.country where p.id=:id")
 	Item findOneCategoryBrandSizeStarPermanAgingCountry(@Param("id")int id);
 }

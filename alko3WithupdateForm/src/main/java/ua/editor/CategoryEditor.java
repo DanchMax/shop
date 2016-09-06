@@ -16,7 +16,7 @@ public class CategoryEditor extends PropertyEditorSupport{
 	
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
-		Category category = categoryService.findOne(Integer.valueOf(text));
+		Category category = categoryService.findById(Integer.valueOf(text));
 		setValue(category);
 	}
 }

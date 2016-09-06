@@ -13,4 +13,6 @@ public interface SexService {
 	Sex findById(int id);
 
 	void delete(int id);
+	
+	Sex findBySex(String sex);
 }

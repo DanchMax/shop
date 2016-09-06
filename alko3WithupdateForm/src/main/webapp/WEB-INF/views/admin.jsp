@@ -11,7 +11,7 @@
 <body>
 <p>Admin panel</p>
 
-<a href="/admin/aging">Aging</a>
+
 <a href="/admin/brand">Brand</a>
 <a href="/admin/category">Category</a>
 <a href="/admin/country">Country</a>
@@ -21,7 +21,7 @@
 <a href="/admin/role">Role</a>
 <a href="/admin/sex">Sex</a>
 <a href="/admin/size">Size</a>
-<a href="/admin/star">Star</a>
+
 <a href="/admin/uzer">Uzer</a>
 
 <hr>

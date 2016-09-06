@@ -12,8 +12,8 @@ import ua.entity.Uzer;
 
 public interface UzerRepository extends JpaRepository<Uzer, Integer> {
 
-	@Query("select u from Uzer u left join fetch u.role u left join fetch u.sex where u.id=:id")
-	Uzer findById(@Param("id") int id);
+	
+	Uzer findById(int id);
 	
 	Uzer findByName(String name);
 
@@ -22,7 +22,7 @@ public interface UzerRepository extends JpaRepository<Uzer, Integer> {
 	@Transactional
 	void deleteById(@Param("id") int id);
 	
-	@Query("select u from Uzer u left join fetch u.role u left join fetch u.sex")
+	@Query("select u from Uzer u left join fetch u.role left join fetch u.sex")
 	List<Uzer> uzers();
 	
 }

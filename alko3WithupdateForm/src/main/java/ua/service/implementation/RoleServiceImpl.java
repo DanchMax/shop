@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ua.entity.Role;
 import ua.repository.RoleRepository;
 import ua.service.RoleService;
@@ -33,6 +34,12 @@ public class RoleServiceImpl implements RoleService{
 	public void save(Role role) {
 		roleRepository.save(role);
 		
+	}
+
+	@Override
+	public Role findByRole(String role) {
+		
+		return roleRepository.findByRole(role);
 	}
 
 }

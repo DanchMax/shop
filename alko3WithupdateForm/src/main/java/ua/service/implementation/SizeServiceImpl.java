@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ua.entity.Size;
 import ua.repository.SizeRepository;
 import ua.service.SizeService;
@@ -38,6 +39,12 @@ public class SizeServiceImpl implements SizeService{
 	public void save(Size size) {
 		sizeRepository.save(size);
 		
+	}
+
+	@Override
+	public Size findBySize(String size) {
+		
+		return sizeRepository.findBySize(size);
 	}
 
 }

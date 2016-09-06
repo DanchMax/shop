@@ -15,5 +15,7 @@ public interface PermanService {
 	void delete(int id);
 
 	Perman findOne(int id);
+	
+	Perman findByPerman(String perman);
 
 }

@@ -16,7 +16,7 @@ public class PermanEditor  extends PropertyEditorSupport{
 	
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
-		Perman perman = permanService.findOne(Integer.valueOf(text));
+		Perman perman = permanService.findById(Integer.valueOf(text));
 		setValue(perman);
 	}
 

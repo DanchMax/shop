@@ -8,7 +8,7 @@ public interface SizeService {
 
 	void save(Size size);
 
-	
+	Size findBySize(String size);
 
 	List<Size> findAll();
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ua.entity.Perman;
 import ua.repository.PermanRepository;
 import ua.service.PermanService;
@@ -37,6 +38,11 @@ public class PermanServiceImpl implements PermanService{
 	public void save(Perman perman) {
 		permanrepository.save(perman);
 		
+	}
+
+	@Override
+	public Perman findByPerman(String perman) {
+		return permanrepository.findByPerman(perman);
 	}
 
 }

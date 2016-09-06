@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ua.entity.Category;
 import ua.repository.CategoryRepository;
 import ua.service.CategoryService;
@@ -37,6 +38,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public void save(Category category) {
 		categoryRepository.save(category);
+	}
+
+	@Override
+	public Category findByCategory(String category) {
+		return categoryRepository.findByCategory(category);
 	}
 
 }

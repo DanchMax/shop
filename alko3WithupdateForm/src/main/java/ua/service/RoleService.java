@@ -14,4 +14,5 @@ public interface RoleService {
 
 	void delete(int id);
 
+	Role findByRole(String role);
 }

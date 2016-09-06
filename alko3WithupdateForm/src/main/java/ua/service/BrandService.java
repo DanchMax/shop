@@ -14,5 +14,5 @@ public interface BrandService {
 
 	List<Brand> findAll();
 
-	Brand findOne(int id);
+	Brand findByBrand(String brand);
 }

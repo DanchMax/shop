@@ -16,7 +16,7 @@ public class SizeEditor extends PropertyEditorSupport{
 	
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
-		Size size = sizeService.findOne(Integer.valueOf(text));
+		Size size = sizeService.findById(Integer.valueOf(text));
 		setValue(size);
 	}
 }

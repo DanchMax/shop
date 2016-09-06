@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h2>Item menu</h2>
-	
+
 	<form:form action="/admin/item" method="post" modelAttribute="form">
 		<form:hidden path="id" />
 		<table>
@@ -29,28 +29,14 @@
 					</form:select></td>
 			</tr>
 			<tr>
-				<td><form:select path="aging">
-						<c:forEach items="${agings}" var="aging">
-							<c:choose>
-								<c:when test="${aging.id eq form.aging.id}">
-									<option value="${aging.id}" selected="selected">${aging.title}</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${aging.id}">${aging.title}</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</form:select></td>
-			</tr>
-			<tr>
 				<td><form:select path="brand">
 						<c:forEach items="${brands}" var="brand">
 							<c:choose>
 								<c:when test="${brand.id eq form.brand.id}">
-									<option value="${brand.id}" selected="selected">${brand.title}</option>
+									<option value="${brand.id}" selected="selected">${brand.brand}</option>
 								</c:when>
 								<c:otherwise>
-									<option value="${brand.id}">${brand.title}</option>
+									<option value="${brand.id}">${brand.brand}</option>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -61,10 +47,10 @@
 						<c:forEach items="${categorys}" var="category">
 							<c:choose>
 								<c:when test="${category.id eq form.category.id}">
-									<option value="${category.id}" selected="selected">${category.title}</option>
+									<option value="${category.id}" selected="selected">${category.category}</option>
 								</c:when>
 								<c:otherwise>
-									<option value="${category.id}">${category.title}</option>
+									<option value="${category.id}">${category.category}</option>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -75,10 +61,10 @@
 						<c:forEach items="${permans}" var="perman">
 							<c:choose>
 								<c:when test="${perman.id eq form.perman.id}">
-									<option value="${perman.id}" selected="selected">${perman.title}</option>
+									<option value="${perman.id}" selected="selected">${perman.perman}</option>
 								</c:when>
 								<c:otherwise>
-									<option value="${perman.id}">${perman.title}</option>
+									<option value="${perman.id}">${perman.perman}</option>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -89,58 +75,47 @@
 						<c:forEach items="${sizes}" var="size">
 							<c:choose>
 								<c:when test="${size.id eq form.size.id}">
-									<option value="${size.id}" selected="selected">${size.title}</option>
+									<option value="${size.id}" selected="selected">${size.size}</option>
 								</c:when>
 								<c:otherwise>
-									<option value="${size.id}">${size.title}</option>
+									<option value="${size.id}">${size.size}</option>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 					</form:select></td>
 			</tr>
 			<tr>
-				<td><form:select path="star">
-						<c:forEach items="${stars}" var="star">
-							<c:choose>
-								<c:when test="${star.id eq form.star.id}">
-									<option value="${star.id}" selected="selected">${star.title}</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${star.id}">${star.title}</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</form:select></td>
+				<td><form:errors path="name" /></td>
 			</tr>
 			<tr>
-				<td><form:input path="title" placeholder="Item title" /></td>
+				<td><form:input path="name" placeholder="Item name" /></td>
 			</tr>
 			<tr>
-				<td><form:input path="price" placeholder="Item title" /></td>
+				<td><form:input path="price" placeholder="Item price" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit"></td>
 			</tr>
 		</table>
 	</form:form>
-	
-	
-	
+
+
+
 	<table>
 
 		<c:forEach items="${items}" var="item">
 			<tr>
-				
-				
-				<td>${item.title}</td>
+
+
+				<td>${item.name}</td>
 				<td>${item.price}</td>
-				<td>${item.aging.title}</td>
-				<td>${item.brand.title}</td>
-				<td>${item.category.title}</td>
-				<td>${item.country.title}</td>
-				<td>${item.perman.title}</td>
-				<td>${item.size.title}</td>
-				<td>${item.star.title}</td>
+
+				<td>${item.brand.brand}</td>
+				<td>${item.category.category}</td>
+				<td>${item.country.country}</td>
+				<td>${item.perman.perman}</td>
+				<td>${item.size.size}</td>
+
 				<td><a href="/admin/item/delete/${item.id}">delete</a></td>
 				<td><a href="/admin/item/update/${item.id}">update</a></td>
 			</tr>

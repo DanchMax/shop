@@ -16,7 +16,7 @@ public class CountryEditor  extends PropertyEditorSupport{
 	
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
-		Country country = countryService.findOne(Integer.valueOf(text));
+		Country country = countryService.findById(Integer.valueOf(text));
 		setValue(country);
 	}
 

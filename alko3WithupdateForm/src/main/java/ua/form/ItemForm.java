@@ -1,13 +1,11 @@
 package ua.form;
 
-import ua.entity.Aging;
 import ua.entity.Brand;
 import ua.entity.Category;
 import ua.entity.Country;
 import ua.entity.Korzina;
 import ua.entity.Perman;
 import ua.entity.Size;
-import ua.entity.Star;
 
 public class ItemForm {
 
@@ -16,8 +14,6 @@ public class ItemForm {
 	private String name;
 
 	private int price;
-
-	private Aging aging;
 
 	private Brand brand;
 
@@ -29,8 +25,6 @@ public class ItemForm {
 
 	private Size size;
 
-	private Star star;
-
 	private Korzina korzina;
 
 	public int getId() {
@@ -41,20 +35,12 @@ public class ItemForm {
 		this.id = id;
 	}
 
-		public int getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
 	public void setPrice(int price) {
 		this.price = price;
-	}
-
-	public Aging getAging() {
-		return aging;
-	}
-
-	public void setAging(Aging aging) {
-		this.aging = aging;
 	}
 
 	public Brand getBrand() {
@@ -95,14 +81,6 @@ public class ItemForm {
 
 	public void setSize(Size size) {
 		this.size = size;
-	}
-
-	public Star getStar() {
-		return star;
-	}
-
-	public void setStar(Star star) {
-		this.star = star;
 	}
 
 	public Korzina getKorzina() {

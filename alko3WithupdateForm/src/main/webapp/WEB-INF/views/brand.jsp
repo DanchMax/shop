@@ -1,36 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Brand title</title>
+<title>Brand name</title>
 </head>
 <body>
-<form action="/admin/brand" method="post">
+	<form:form action="/admin/brand" method="post" modelAttribute="brand">
+		<form:hidden path="id"/>
 		<table>
+ 			<tr>
+ 				<td><form:errors path="brand"/></td>
+ 			</tr>
 			<tr>
-				<td><input name="title"></td>
+				<td><form:input path="brand"/></td>
 			</tr>
 			<tr>
 				<td><input type="submit"></td>
 			</tr>
 		</table>
-	</form>
+	</form:form>
 	<table>
 		<tr>
-			<th>Brand title</th>
+			<th>Brand name</th>
 		</tr>
 		<c:forEach items="${brands}" var="brand">
 			<tr>
-				<td>${brand.title}</td>
-				<td>
-					<a href="/admin/brand/delete/${brand.id}">delete</a>
-				</td>
-				<td>
-					<a href="/admin/brand/update/${brand.id}">update</a>
-				</td>
+				<td>${brand.brand}</td>
+				<td><a href="/admin/brand/delete/${brand.id}">delete</a></td>
+				<td><a href="/admin/brand/update/${brand.id}">update</a></td>
 			</tr>
 		</c:forEach>
 	</table>

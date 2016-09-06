@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ua.entity.Country;
 import ua.repository.CountryRepository;
 import ua.service.CountryService;
@@ -39,6 +40,11 @@ public class CountryServiceImpl implements CountryService{
 	public void save(Country country) {
 		countryRepository.save(country);
 		
+	}
+
+	@Override
+	public Country findByCountry(String country) {
+		return countryRepository.findByCountry(country);
 	}
 
 }

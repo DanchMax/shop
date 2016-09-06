@@ -30,8 +30,8 @@ public class BrandServiceImpl implements BrandService {
 	}
 
 	@Override
-	public Brand findOne(int id) {
-		return brandRepository.findOne(id);
+	public Brand findByBrand(String brand) {
+		return brandRepository.findByBrand(brand);
 	}
 
 	@Override
