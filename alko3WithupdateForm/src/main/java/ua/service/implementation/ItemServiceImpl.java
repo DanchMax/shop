@@ -38,7 +38,7 @@ public class ItemServiceImpl implements ItemService {
 		item.setCategory(form.getCategory());
 		item.setCountry(form.getCountry());
 		item.setPerman(form.getPerman());
-		item.setPrice(form.getPrice());
+		item.setPrice(Integer.parseInt(form.getPrice()));
 		item.setSize(form.getSize());
 
 		item.setName(form.getName());
@@ -78,7 +78,7 @@ public class ItemServiceImpl implements ItemService {
 		form.setId(item.getId());
 		form.setKorzina(item.getKorzina());
 		form.setPerman(item.getPerman());
-		form.setPrice(item.getPrice());
+		form.setPrice(String.valueOf(item.getPrice()));
 		form.setSize(item.getSize());
 
 		form.setName(item.getName());

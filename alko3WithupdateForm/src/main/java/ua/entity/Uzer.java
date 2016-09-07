@@ -9,10 +9,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(indexes={@Index(columnList="name"), @Index(columnList="login"), 
+		@Index(columnList="mail")})
 public class Uzer {
 
 	@Id

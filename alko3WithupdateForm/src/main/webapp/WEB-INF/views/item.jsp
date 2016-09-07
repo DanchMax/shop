@@ -16,13 +16,13 @@
 		<table>
 			<tr>
 				<td><form:select path="country">
-						<c:forEach items="${countries}" var="country">
+						<c:forEach items="${countrys}" var="country">
 							<c:choose>
 								<c:when test="${country.id eq form.country.id}">
-									<option value="${country.id}" selected="selected">${country.title}</option>
+									<option value="${country.id}" selected="selected">${country.country}</option>
 								</c:when>
 								<c:otherwise>
-									<option value="${country.id}">${country.title}</option>
+									<option value="${country.id}">${country.country}</option>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -89,6 +89,9 @@
 			</tr>
 			<tr>
 				<td><form:input path="name" placeholder="Item name" /></td>
+			</tr>
+			<tr>
+				<td><form:errors path="price" /></td>
 			</tr>
 			<tr>
 				<td><form:input path="price" placeholder="Item price" /></td>

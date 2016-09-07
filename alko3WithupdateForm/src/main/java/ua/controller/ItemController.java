@@ -71,7 +71,7 @@ public class ItemController {
 
 	@RequestMapping("/admin/item")
 	public String show(Model model) {
-		model.addAttribute("items", itemService.findAll());
+		model.addAttribute("items", itemService.items());
 
 		model.addAttribute("brands", brandService.findAll());
 		model.addAttribute("categorys", categoryService.findAll());
@@ -100,7 +100,7 @@ public class ItemController {
 	@RequestMapping("/admin/item/delete/{id}")
 	public String delete(@PathVariable int id) {
 		itemService.delete(id);
-		return "item";
+		return "redirect: /admin/item";
 	}
 
 	@RequestMapping(value = "/admin/item/update/{id}")

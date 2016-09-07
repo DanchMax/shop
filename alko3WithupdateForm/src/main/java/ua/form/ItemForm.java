@@ -13,7 +13,7 @@ public class ItemForm {
 
 	private String name;
 
-	private int price;
+	private String price;
 
 	private Brand brand;
 
@@ -35,11 +35,11 @@ public class ItemForm {
 		this.id = id;
 	}
 
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
