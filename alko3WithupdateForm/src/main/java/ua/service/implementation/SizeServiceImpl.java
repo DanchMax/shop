@@ -3,6 +3,8 @@ package ua.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Size;
@@ -45,6 +47,12 @@ public class SizeServiceImpl implements SizeService{
 	public Size findBySize(String size) {
 		
 		return sizeRepository.findBySize(size);
+	}
+
+	@Override
+	public Page<Size> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return sizeRepository.findAll(pageable);
 	}
 
 }

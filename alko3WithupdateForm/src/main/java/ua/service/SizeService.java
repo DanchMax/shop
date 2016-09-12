@@ -2,6 +2,9 @@ package ua.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import ua.entity.Size;
 
 public interface SizeService {
@@ -17,4 +20,6 @@ public interface SizeService {
 	void delete(int id);
 
 	Size findOne(int id);
+	
+	Page<Size> findAll(Pageable pageable);
 }

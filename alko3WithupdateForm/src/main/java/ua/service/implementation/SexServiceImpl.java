@@ -3,6 +3,8 @@ package ua.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Sex;
@@ -41,6 +43,12 @@ public class SexServiceImpl implements SexService{
 	public Sex findBySex(String sex) {
 		
 		return sexRepository.findBySex(sex);
+	}
+
+	@Override
+	public Page<Sex> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return sexRepository.findAll(pageable);
 	}
 
 }

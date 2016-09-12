@@ -27,14 +27,37 @@
 			<tr>
 				<th>Country name</th>
 			</tr>
-			<c:forEach items="${countrys}" var="country">
+			<c:forEach items="${page.content}" var="country">
 				<tr>
 					<td>${country.country}</td>
-					<td><a href="/admin/country/delete/${country.id}">delete</a></td>
+					<td><a href="/admin/country/delete/${country.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}">delete</a></td>
 					<td><a href="/admin/country/update/${country.id}">update</a></td>
 				</tr>
 			</c:forEach>
 		</table>
+		<table>
+		<tr>
+			<c:if test="${page.hasPrevious()}">
+				<td><a
+					href="?page=${page.number}&size=${page.size}&sort=${param['sort']}">Previous</a></td>
+			</c:if>
+			<c:if test="${page.hasNext()}">
+				<td><a
+					href="?page=${page.number+2}&size=${page.size}&sort=${param['sort']}">Next</a></td>
+			</c:if>
+		</tr>
+		<tr>
+			<td><a href="?page=1&size=1&sort=${param['sort']}">1</a></td>
+			<td><a href="?page=1&size=5&sort=${param['sort']}">5</a></td>
+			<td><a href="?page=1&size=10&sort=${param['sort']}">10</a></td>
+			<td><a href="?page=1&size=20&sort=${param['sort']}">20</a></td>
+		</tr>
+		<tr>
+			<td><a href="?page=1&size=${page.size}&sort=country">Name asc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=country,desc">Name
+					desc</a></td>
+		</tr>
+	</table>
 		<hr>
 		<a href="/admin">Back to admin panel</a>
 		<hr>

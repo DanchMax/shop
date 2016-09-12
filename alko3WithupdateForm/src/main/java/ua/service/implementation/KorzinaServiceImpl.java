@@ -3,7 +3,10 @@ package ua.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import ua.entity.Korzina;
 import ua.repository.ItemRepository;
 import ua.repository.KorzinaRepository;
@@ -45,6 +48,12 @@ public class KorzinaServiceImpl implements KorzinaService {
 	@Override
 	public List<Korzina> korzinas() {
 		return korzinaRepository.korzinas();
+	}
+
+	@Override
+	public Page<Korzina> findAll(Pageable pageable) {
+		
+		return korzinaRepository.findAll(pageable);
 	}
 	}
 

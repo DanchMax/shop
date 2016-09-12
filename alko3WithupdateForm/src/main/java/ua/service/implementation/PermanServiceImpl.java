@@ -3,6 +3,8 @@ package ua.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Perman;
@@ -43,6 +45,12 @@ public class PermanServiceImpl implements PermanService{
 	@Override
 	public Perman findByPerman(String perman) {
 		return permanrepository.findByPerman(perman);
+	}
+
+	@Override
+	public Page<Perman> findAll(Pageable pageable) {
+		
+		return permanrepository.findAll(pageable);
 	}
 
 }

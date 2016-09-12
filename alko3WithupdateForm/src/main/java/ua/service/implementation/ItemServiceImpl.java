@@ -3,6 +3,8 @@ package ua.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Item;
@@ -40,7 +42,6 @@ public class ItemServiceImpl implements ItemService {
 		item.setPerman(form.getPerman());
 		item.setPrice(Integer.parseInt(form.getPrice()));
 		item.setSize(form.getSize());
-
 		item.setName(form.getName());
 		itemRepository.save(item);
 
@@ -80,7 +81,6 @@ public class ItemServiceImpl implements ItemService {
 		form.setPerman(item.getPerman());
 		form.setPrice(String.valueOf(item.getPrice()));
 		form.setSize(item.getSize());
-
 		form.setName(item.getName());
 		return form;
 	}
@@ -89,6 +89,12 @@ public class ItemServiceImpl implements ItemService {
 	public Item findByName(String name) {
 
 		return itemRepository.findByName(name);
+	}
+
+	@Override
+	public Page<Item> findAll(Pageable pageable) {
+		
+		return itemRepository.findAll(pageable);
 	}
 
 }

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<link rel="stylesheet" href="/resources/css/style.css"/>
 <title><tiles:getAsString name="title" /></title>
 </head>
 <body>

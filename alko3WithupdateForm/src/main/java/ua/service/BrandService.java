@@ -2,6 +2,9 @@ package ua.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import ua.entity.Brand;
 
 public interface BrandService {
@@ -15,4 +18,6 @@ public interface BrandService {
 	List<Brand> findAll();
 
 	Brand findByBrand(String brand);
+	
+	Page<Brand> findAll(Pageable pageable);
 }
