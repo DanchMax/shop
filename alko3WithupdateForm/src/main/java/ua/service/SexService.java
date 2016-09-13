@@ -20,4 +20,6 @@ public interface SexService {
 	Sex findBySex(String sex);
 	
 	Page<Sex> findAll(Pageable pageable);
+	
+	
 }

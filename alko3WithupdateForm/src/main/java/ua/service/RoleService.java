@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import ua.entity.Role;
+import ua.form.RoleFilterForm;
 
 public interface RoleService {
 
@@ -18,5 +19,8 @@ public interface RoleService {
 	void delete(int id);
 
 	Role findByRole(String role);
+
 	Page<Role> findAll(Pageable pageable);
+	
+	Page<Role> findAll(RoleFilterForm form, Pageable pageable);
 }

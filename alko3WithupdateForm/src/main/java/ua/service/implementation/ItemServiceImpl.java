@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Item;
+import ua.form.ItemFilterForm;
 import ua.form.ItemForm;
 import ua.repository.BrandRepository;
 import ua.repository.CategoryRepository;
@@ -16,6 +17,7 @@ import ua.repository.ItemRepository;
 import ua.repository.PermanRepository;
 import ua.repository.SizeRepository;
 import ua.service.ItemService;
+import ua.specification.ItemFilterAdapter;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -95,6 +97,12 @@ public class ItemServiceImpl implements ItemService {
 	public Page<Item> findAll(Pageable pageable) {
 		
 		return itemRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Item> findAll(ItemFilterForm form, Pageable pageable) {
+		
+		return itemRepository.findAll(new ItemFilterAdapter(form) , pageable);
 	}
 
 }

@@ -8,8 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Size;
+import ua.form.SizeFilterForm;
 import ua.repository.SizeRepository;
 import ua.service.SizeService;
+import ua.specification.SizeFilterAdapter;
 @Service
 
 public class SizeServiceImpl implements SizeService{
@@ -51,8 +53,14 @@ public class SizeServiceImpl implements SizeService{
 
 	@Override
 	public Page<Size> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
+		
 		return sizeRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Size> findAll(SizeFilterForm form, Pageable pageable) {
+		
+		return sizeRepository.findAll( new SizeFilterAdapter(form) , pageable);
 	}
 
 }

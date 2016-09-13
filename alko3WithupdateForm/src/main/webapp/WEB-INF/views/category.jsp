@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="/WEB-INF/custom.tld" prefix="custom"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,17 +10,39 @@
 <title>Category name</title>
 </head>
 <body>
+<p>Category name</p>
 	<form:form action="/admin/category" method="post" modelAttribute="category">
-		<form:hidden path="id"/>
+		<form:hidden path="id" />
+		<c:forEach items="${param}" var="parameter">
+			<c:forEach items="${parameter.value}" var="value">
+				<input type="hidden" name="${parameter.key}" value="${value}">
+			</c:forEach>
+		</c:forEach>
+		
 		<table>
- 			<tr>
- 				<td><form:errors path="category"/></td>
- 			</tr>
 			<tr>
-				<td><form:input path="category"/></td>
+				<td><form:errors path="category" /></td>
+			</tr>
+			<tr>
+				<td><form:input path="category" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit"></td>
+			</tr>
+		</table>
+	</form:form>
+	<form:form action="/admin/category" method="get" modelAttribute="filter">
+		<c:forEach items="${param}" var="parameter">
+			<c:forEach items="${parameter.value}" var="value">
+				<c:if test="${parameter.key ne 'search'}">
+					<input type="hidden" name="${parameter.key}" value="${value}">
+				</c:if>
+			</c:forEach>
+		</c:forEach>
+		<table>
+			<tr>
+				<td><form:input path="search" placeholder="search" /><input
+					type="submit" value="ok"></td>
 			</tr>
 		</table>
 	</form:form>
@@ -30,39 +53,40 @@
 		<c:forEach items="${page.content}" var="category">
 			<tr>
 				<td>${category.category}</td>
-				<td><a href="/admin/category/delete/${category.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}">delete</a>
+				<td><a
+					href="/admin/category/delete/${category.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}&search=${param['search']}">delete</a>
 				</td>
-				<td><a href="/admin/category/update/${category.id}">update</a>
+				<td><a
+					href="/admin/category/update/${category.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}&search=${param['search']}">update</a>
 				</td>
 			</tr>
 		</c:forEach>
-	</table>
-	<table>
+	
 		<tr>
-			<c:if test="${page.hasPrevious()}">
-				<td><a
-					href="?page=${page.number}&size=${page.size}&sort=${param['sort']}">Previous</a></td>
-			</c:if>
-			<c:if test="${page.hasNext()}">
-				<td><a
-					href="?page=${page.number+2}&size=${page.size}&sort=${param['sort']}">Next</a></td>
-			</c:if>
+			<td><a
+				href="?page=1&size=1&sort=${param['sort']}&search=${param['search']}">1</a></td>
+			<td><a
+				href="?page=1&size=5&sort=${param['sort']}&search=${param['search']}">5</a></td>
+			<td><a
+				href="?page=1&size=10&sort=${param['sort']}&search=${param['search']}">10</a></td>
+			<td><a
+				href="?page=1&size=20&sort=${param['sort']}&search=${param['search']}">20</a></td>
 		</tr>
 		<tr>
-			<td><a href="?page=1&size=1&sort=${param['sort']}">1</a></td>
-			<td><a href="?page=1&size=5&sort=${param['sort']}">5</a></td>
-			<td><a href="?page=1&size=10&sort=${param['sort']}">10</a></td>
-			<td><a href="?page=1&size=20&sort=${param['sort']}">20</a></td>
-		</tr>
-		<tr>
-			<td><a href="?page=1&size=${page.size}&sort=category">Name asc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=category,desc">Name
+			<td><a
+				href="?page=1&size=${page.size}&sort=category&search=${param['search']}">Category
+					asc</a></td>
+			<td><a
+				href="?page=1&size=${page.size}&sort=category,desc&search=${param['search']}">Category
 					desc</a></td>
 		</tr>
 	</table>
-	
-	
-	
+
+	<div class="col-md-12 text-center">
+		<custom:pageable page="${page}" cell="<li></li>"
+			container="<ul class='pagination'></ul>" />
+	</div>
+
 	<hr>
 	<a href="/admin">Back to admin panel</a>
 	<hr>

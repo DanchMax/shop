@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import ua.entity.Size;
+import ua.form.SizeFilterForm;
 
 public interface SizeService {
 
@@ -22,4 +23,6 @@ public interface SizeService {
 	Size findOne(int id);
 	
 	Page<Size> findAll(Pageable pageable);
+	
+	Page<Size> findAll( SizeFilterForm form, Pageable pageable);
 }

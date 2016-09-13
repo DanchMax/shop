@@ -8,10 +8,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Korzina;
+import ua.form.KorzinaFilterForm;
 import ua.repository.ItemRepository;
 import ua.repository.KorzinaRepository;
 import ua.repository.UzerRepository;
 import ua.service.KorzinaService;
+import ua.specification.KorzinaFilterAdapter;
 
 @Service
 
@@ -54,6 +56,12 @@ public class KorzinaServiceImpl implements KorzinaService {
 	public Page<Korzina> findAll(Pageable pageable) {
 		
 		return korzinaRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Korzina> findAll(KorzinaFilterForm form, Pageable pageable) {
+		
+		return korzinaRepository.findAll(new KorzinaFilterAdapter(form) , pageable);
 	}
 	}
 

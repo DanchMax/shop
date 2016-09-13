@@ -4,6 +4,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.entity.Brand;
+import ua.form.BrandFilterForm;
 import ua.service.BrandService;
 import ua.validator.BrandValidator;
 
@@ -30,41 +33,71 @@ public class BrandController {
 	public Brand getBrand() {
 		return new Brand();
 	}
-	
+
+	@ModelAttribute("filter")
+	public BrandFilterForm getFilter() {
+		return new BrandFilterForm();
+	}
+
 	@InitBinder("brand")
-	protected void initBinder(WebDataBinder binder){
+	protected void initBinder(WebDataBinder binder) {
 		binder.setValidator(new BrandValidator(brandService));
 	}
 
 	@RequestMapping("/admin/brand")
-	public String show(Model model, @PageableDefault(5) Pageable pageable) {
-		model.addAttribute("page", brandService.findAll(pageable));
+	public String show(Model model, @PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value = "filter") BrandFilterForm form) {
+		model.addAttribute("page", brandService.findAll(form, pageable));
 		return "brand";
 
 	}
 
 	@RequestMapping("/admin/brand/delete/{id}")
-	public String delete(@PathVariable int id, @RequestParam(value="page", required=false, defaultValue="1") int page, 
-			@RequestParam(value="size", required=false, defaultValue="5") int size,
-			@RequestParam(value="sort", required=false, defaultValue="") String sort) {
+	public String delete(@PathVariable int id,
+			@PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value = "filter") BrandFilterForm form) {
 		brandService.delete(id);
-		return "redirect:/admin/brand?page="+page+"&size="+size+"&sort="+sort;
+		return "redirect:/admin/brand" + getParams(form, pageable);
 	}
 
 	@RequestMapping(value = "/admin/brand", method = RequestMethod.POST)
-	public String save(@ModelAttribute("brand") @Valid Brand brand, BindingResult br, Model model) {
-		if(br.hasErrors()){
-			model.addAttribute("brands", brandService.findAll());
+	public String save(@ModelAttribute("brand") Brand brand, BindingResult br,
+			@PageableDefault(5) Pageable pageable, Model model,
+			@ModelAttribute(value = "filter") BrandFilterForm form) {
+		if (br.hasErrors()) {
+			model.addAttribute("page", brandService.findAll(form, pageable));
 			return "brand";
 		}
 		brandService.save(brand);
-		return "redirect:/admin/brand";
+		return "redirect:/admin/brand" + getParams(form, pageable);
 	}
 
 	@RequestMapping("/admin/brand/update/{id}")
-	public String update(@PathVariable int id, Model model) {
+	public String update(Model model, @PathVariable int id,
+			@PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value = "filter") BrandFilterForm form) {
 		model.addAttribute("brand", brandService.findById(id));
-		model.addAttribute("brands", brandService.findAll());
+		model.addAttribute("page", brandService.findAll(form, pageable));
 		return "brand";
+	}
+
+	private String getParams(BrandFilterForm form, Pageable pageable) {
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("?page=");
+		buffer.append(String.valueOf(pageable.getPageNumber() + 1));
+		buffer.append("&size=");
+		buffer.append(String.valueOf(pageable.getPageSize()));
+		if (pageable.getSort() != null) {
+			buffer.append("&sort=");
+			Sort sort = pageable.getSort();
+			sort.forEach((order) -> {
+				buffer.append(order.getProperty());
+				if (order.getDirection() != Direction.ASC)
+					buffer.append(",desc");
+			});
+		}
+		buffer.append("&search=");
+		buffer.append(form.getSearch());
+		return buffer.toString();
 	}
 }

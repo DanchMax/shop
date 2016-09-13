@@ -8,8 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Perman;
+import ua.form.PermanFilterForm;
 import ua.repository.PermanRepository;
 import ua.service.PermanService;
+import ua.specification.PermanFilterAdapter;
 @Service
 public class PermanServiceImpl implements PermanService{
 
@@ -51,6 +53,12 @@ public class PermanServiceImpl implements PermanService{
 	public Page<Perman> findAll(Pageable pageable) {
 		
 		return permanrepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Perman> findAll(PermanFilterForm form, Pageable pageable) {
+		
+		return permanrepository.findAll(new PermanFilterAdapter(form), pageable);
 	}
 
 }

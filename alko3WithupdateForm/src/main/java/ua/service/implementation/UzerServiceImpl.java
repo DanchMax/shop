@@ -8,10 +8,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Uzer;
+import ua.form.UzerFilterForm;
 import ua.repository.RoleRepository;
 import ua.repository.SexRepository;
 import ua.repository.UzerRepository;
 import ua.service.UzerService;
+import ua.specification.UzerFilterAdapter;
 
 @Service
 
@@ -50,8 +52,14 @@ public class UzerServiceImpl implements UzerService {
 
 	@Override
 	public Page<Uzer> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
+		
 		return uzerRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Uzer> findAll(UzerFilterForm form, Pageable pageable) {
+		
+		return uzerRepository.findAll(new UzerFilterAdapter(form), pageable);
 	}
 
 }

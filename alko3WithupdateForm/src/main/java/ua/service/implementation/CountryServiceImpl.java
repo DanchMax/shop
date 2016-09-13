@@ -8,8 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Country;
+import ua.form.CountryFilterForm;
 import ua.repository.CountryRepository;
 import ua.service.CountryService;
+import ua.specification.CountryFilterAdapter;
 
 @Service
 public class CountryServiceImpl implements CountryService{
@@ -53,6 +55,12 @@ public class CountryServiceImpl implements CountryService{
 	public Page<Country> findAll(Pageable pageable) {
 		
 		return countryRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Country> findAll(CountryFilterForm form, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return countryRepository.findAll(new CountryFilterAdapter(form), pageable);
 	}
 
 }

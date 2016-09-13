@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import ua.entity.Item;
+import ua.form.ItemFilterForm;
 import ua.form.ItemForm;
 
 public interface ItemService {
@@ -25,5 +26,7 @@ public interface ItemService {
 	ItemForm FindForForm(int id);
 
 	Page<Item> findAll(Pageable pageable);
+	
+	Page<Item> findAll( ItemFilterForm form, Pageable pageable);
 
 }

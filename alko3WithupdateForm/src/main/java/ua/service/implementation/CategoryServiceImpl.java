@@ -8,8 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Category;
+import ua.form.CategoryFilterForm;
 import ua.repository.CategoryRepository;
 import ua.service.CategoryService;
+import ua.specification.CategoryFilterAdapter;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -51,5 +53,13 @@ public class CategoryServiceImpl implements CategoryService {
 	public Page<Category> findAll(Pageable pageable) {
 		return categoryRepository.findAll(pageable);
 	}
+
+	@Override
+	public Page<Category> findAll(CategoryFilterForm form, Pageable pageable) {
+		
+		return categoryRepository.findAll(new CategoryFilterAdapter(form), pageable);
+	}
+
+	
 
 }

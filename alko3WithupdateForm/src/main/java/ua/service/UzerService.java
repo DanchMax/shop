@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import ua.entity.Uzer;
+import ua.form.UzerFilterForm;
 
 public interface UzerService {
 
@@ -19,4 +20,5 @@ public interface UzerService {
 
 	void delete(int id);
 	Page<Uzer> findAll(Pageable pageable);
+	Page<Uzer> findAll(UzerFilterForm form, Pageable pageable);
 }

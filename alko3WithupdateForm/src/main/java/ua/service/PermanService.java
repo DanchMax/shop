@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import ua.entity.Perman;
+import ua.form.PermanFilterForm;
 
 public interface PermanService {
 
@@ -18,7 +19,10 @@ public interface PermanService {
 	void delete(int id);
 
 	Perman findOne(int id);
-	
+
 	Perman findByPerman(String perman);
+
 	Page<Perman> findAll(Pageable pageable);
+
+	Page<Perman> findAll(PermanFilterForm form, Pageable pageable);
 }

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import ua.entity.Korzina;
+import ua.form.KorzinaFilterForm;
 
 public interface KorzinaService {
 
@@ -20,4 +21,6 @@ public interface KorzinaService {
 	void delete(int id);
 
 	Page<Korzina> findAll(Pageable pageable);
+	
+	Page<Korzina> findAll( KorzinaFilterForm form, Pageable pageable);
 }
