@@ -22,35 +22,35 @@ public class UzerController {
 	@Autowired
 	private UzerService uzerService;
 
-	@ModelAttribute("uzer")
+	@ModelAttribute("adminUzer")
 	public Uzer getUzer() {
 		return new Uzer();
 	}
 
-	@RequestMapping("/admin/uzer")
+	@RequestMapping("/admin/adminUzer")
 	public String show(Model model) {
 		model.addAttribute("sexs", sexService.findAll());
 		model.addAttribute("roles", roleService.findAll());
 		model.addAttribute("uzers", uzerService.findAll());
-		return "uzer";
+		return "adminUzer";
 	}
 
-	@RequestMapping(value = "/admin/uzer", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/adminUzer", method = RequestMethod.POST)
 	public String save(@ModelAttribute("uzer") Uzer uzer) {
 		uzerService.save(uzer);
-		return "redirect:/admin/uzer";
+		return "redirect:/admin/adminUzer";
 	}
 	
-	@RequestMapping("/admin/uzer/delete/{id}")
+	@RequestMapping("/admin/adminUzer/delete/{id}")
 	public String delete(@PathVariable int id){
 		uzerService.delete(id);
-		return "uzer";
+		return "adminUzer";
 	}
-	@RequestMapping(value = "/admin/uzer/update/{id}")
+	@RequestMapping(value = "/admin/adminUzer/update/{id}")
 	public String update(Model model, @PathVariable int id) {
 		model.addAttribute("uzer", uzerService.findById(id));
 		model.addAttribute("uzers", uzerService.uzers());
 		model.addAttribute("roles", roleService.findAll());
-		return "uzer";
+		return "adminUzer";
 	}
 }

@@ -74,7 +74,6 @@ public class ItemServiceImpl implements ItemService {
 		Item item = itemRepository
 				.findOneCategoryBrandSizeStarPermanAgingCountry(id);
 		ItemForm form = new ItemForm();
-
 		form.setBrand(item.getBrand());
 		form.setCategory(item.getCategory());
 		form.setCountry(item.getCountry());
@@ -102,7 +101,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public Page<Item> findAll(ItemFilterForm form, Pageable pageable) {
 		
-		return itemRepository.findAll(new ItemFilterAdapter(form) , pageable);
+		return itemRepository.findAll( new ItemFilterAdapter(form), pageable);
 	}
 
 }

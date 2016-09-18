@@ -10,19 +10,19 @@
 </head>
 <h2>Uzer menu</h2>
 <body>
-	<form action="/admin/uzer" method="post">
+	<form action="/admin/adminUzer" method="post">
 		<table>
 			<tr>
 				<td><select name="role">
 						<c:forEach items="${roles}" var="role">
-							<option value="${role.title}">${role.title}</option>
+							<option value="${role.role}">${role.role}</option>
 						</c:forEach>
 				</select></td>
 			</tr>
 			<tr>
 				<td><select name="sex">
 						<c:forEach items="${sexs}" var="sex">
-							<option value="${sex.title}">${sex.title}</option>
+							<option value="${sex.sex}">${sex.sex}</option>
 						</c:forEach>
 
 				</select></td>
@@ -56,8 +56,8 @@
 				<td>${uzer.sex}</td>
 				<td>${uzer.role}</td>
 				<td>${uzer.mail}</td>
-				<td><a href="/admin/uzer/delete/${uzer.id}">delete</a></td>
-				<td><a href="/admin/uzer/update/${uzer.id}">update</a></td>
+				<td><a href="/admin/adminUzer/delete/${uzer.id}">delete</a></td>
+				<td><a href="/admin/adminUzer/update/${uzer.id}">update</a></td>
 			</tr>
 		</c:forEach>
 	</table>

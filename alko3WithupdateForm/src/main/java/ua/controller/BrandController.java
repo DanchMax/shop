@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.entity.Brand;
 import ua.form.BrandFilterForm;
@@ -28,72 +27,73 @@ public class BrandController {
 
 	@Autowired
 	private BrandService brandService;
-
+	
 	@ModelAttribute("brand")
 	public Brand getBrand() {
 		return new Brand();
 	}
-
+	
 	@ModelAttribute("filter")
-	public BrandFilterForm getFilter() {
+	public BrandFilterForm getFilter(){
 		return new BrandFilterForm();
 	}
-
+	
 	@InitBinder("brand")
-	protected void initBinder(WebDataBinder binder) {
+	protected void initBinder(WebDataBinder binder){
 		binder.setValidator(new BrandValidator(brandService));
 	}
-
+	
 	@RequestMapping("/admin/brand")
-	public String show(Model model, @PageableDefault(5) Pageable pageable,
-			@ModelAttribute(value = "filter") BrandFilterForm form) {
-		model.addAttribute("page", brandService.findAll(form, pageable));
+	public String show(Model model, @PageableDefault(5) Pageable pageable, @ModelAttribute(value="filter") BrandFilterForm form){
+		model.addAttribute("page", brandService.findAll( form, pageable));
 		return "brand";
-
 	}
-
+	
 	@RequestMapping("/admin/brand/delete/{id}")
 	public String delete(@PathVariable int id,
 			@PageableDefault(5) Pageable pageable,
-			@ModelAttribute(value = "filter") BrandFilterForm form) {
+			@ModelAttribute(value="filter") BrandFilterForm form){
 		brandService.delete(id);
-		return "redirect:/admin/brand" + getParams(form, pageable);
+		return "redirect:/admin/brand"+getParams( form, pageable);
 	}
-
-	@RequestMapping(value = "/admin/brand", method = RequestMethod.POST)
-	public String save(@ModelAttribute("brand") Brand brand, BindingResult br,
-			@PageableDefault(5) Pageable pageable, Model model,
-			@ModelAttribute(value = "filter") BrandFilterForm form) {
-		if (br.hasErrors()) {
-			model.addAttribute("page", brandService.findAll(form, pageable));
+	
+	@RequestMapping(value= "/admin/brand", method=RequestMethod.POST)
+	public String save(@ModelAttribute("brand") @Valid Brand brand,
+			BindingResult br,
+			@PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value="filter") BrandFilterForm form,
+			Model model) {
+		if(br.hasErrors()){
+			model.addAttribute("page", brandService.findAll( form, pageable));
 			return "brand";
 		}
 		brandService.save(brand);
-		return "redirect:/admin/brand" + getParams(form, pageable);
+		return "redirect:/admin/brand"+ getParams(form, pageable);
 	}
-
+	
 	@RequestMapping("/admin/brand/update/{id}")
-	public String update(Model model, @PathVariable int id,
+	public String update(Model model,
+			@PathVariable int id,
 			@PageableDefault(5) Pageable pageable,
-			@ModelAttribute(value = "filter") BrandFilterForm form) {
-		model.addAttribute("brand", brandService.findById(id));
-		model.addAttribute("page", brandService.findAll(form, pageable));
+			@ModelAttribute(value="filter") BrandFilterForm form) {
+		model.addAttribute("country", brandService.findById(id));
+		model.addAttribute("page", brandService.findAll( form, pageable));
 		return "brand";
 	}
-
-	private String getParams(BrandFilterForm form, Pageable pageable) {
+	
+	private String getParams( BrandFilterForm form, Pageable pageable){
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("?page=");
-		buffer.append(String.valueOf(pageable.getPageNumber() + 1));
+		buffer.append(String.valueOf(pageable.getPageNumber()+1));
 		buffer.append("&size=");
 		buffer.append(String.valueOf(pageable.getPageSize()));
-		if (pageable.getSort() != null) {
+		if(pageable.getSort()!=null){
 			buffer.append("&sort=");
 			Sort sort = pageable.getSort();
-			sort.forEach((order) -> {
+			sort.forEach((order)->{
 				buffer.append(order.getProperty());
-				if (order.getDirection() != Direction.ASC)
-					buffer.append(",desc");
+				if(order.getDirection()!=Direction.ASC)
+				buffer.append(",desc");
 			});
 		}
 		buffer.append("&search=");

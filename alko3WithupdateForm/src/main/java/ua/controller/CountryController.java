@@ -4,6 +4,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import ua.entity.Country;
+import ua.form.CountryFilterForm;
 import ua.service.CountryService;
 import ua.validator.CountryValidator;
 
@@ -31,39 +32,71 @@ public class CountryController {
 		return new Country();
 	}
 	
+	@ModelAttribute("filter")
+	public CountryFilterForm getFilter(){
+		return new CountryFilterForm();
+	}
+	
 	@InitBinder("country")
 	protected void initBinder(WebDataBinder binder){
 		binder.setValidator(new CountryValidator(countryService));
 	}
 	
 	@RequestMapping("/admin/country")
-	public String show(Model model, @PageableDefault(5) Pageable pageable){
-		model.addAttribute("page", countryService.findAll(pageable));
+	public String show(Model model, @PageableDefault(5) Pageable pageable, @ModelAttribute(value="filter") CountryFilterForm form){
+		model.addAttribute("page", countryService.findAll( form, pageable));
 		return "country";
 	}
 	
 	@RequestMapping("/admin/country/delete/{id}")
-	public String delete(@PathVariable int id, @RequestParam(value="page", required=false, defaultValue="1") int page, 
-			@RequestParam(value="size", required=false, defaultValue="5") int size,
-			@RequestParam(value="sort", required=false, defaultValue="") String sort){
+	public String delete(@PathVariable int id,
+			@PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value="filter") CountryFilterForm form){
 		countryService.delete(id);
-		return "redirect:/admin/country?page="+page+"&size="+size+"&sort="+sort;
+		return "redirect:/admin/country"+getParams( form, pageable);
 	}
 	
 	@RequestMapping(value= "/admin/country", method=RequestMethod.POST)
-	public String save(@ModelAttribute("country") @Valid Country country, BindingResult br, Model model) {
+	public String save(@ModelAttribute("country") @Valid Country country,
+			BindingResult br,
+			@PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value="filter") CountryFilterForm form,
+			Model model) {
 		if(br.hasErrors()){
-			model.addAttribute("countrys", countryService.findAll());
+			model.addAttribute("page", countryService.findAll( form, pageable));
 			return "country";
 		}
 		countryService.save(country);
-		return "redirect:/admin/country";
+		return "redirect:/admin/country"+ getParams(form, pageable);
 	}
 	
 	@RequestMapping("/admin/country/update/{id}")
-	public String update(@PathVariable int id, Model model) {
+	public String update(Model model,
+			@PathVariable int id,
+			@PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value="filter") CountryFilterForm form) {
 		model.addAttribute("country", countryService.findById(id));
-		model.addAttribute("countrys", countryService.findAll());
+		model.addAttribute("page", countryService.findAll( form, pageable));
 		return "country";
+	}
+	
+	private String getParams( CountryFilterForm form, Pageable pageable){
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("?page=");
+		buffer.append(String.valueOf(pageable.getPageNumber()+1));
+		buffer.append("&size=");
+		buffer.append(String.valueOf(pageable.getPageSize()));
+		if(pageable.getSort()!=null){
+			buffer.append("&sort=");
+			Sort sort = pageable.getSort();
+			sort.forEach((order)->{
+				buffer.append(order.getProperty());
+				if(order.getDirection()!=Direction.ASC)
+				buffer.append(",desc");
+			});
+		}
+		buffer.append("&search=");
+		buffer.append(form.getSearch());
+		return buffer.toString();
 	}
 }

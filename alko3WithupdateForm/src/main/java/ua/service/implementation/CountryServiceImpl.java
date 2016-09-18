@@ -14,11 +14,10 @@ import ua.service.CountryService;
 import ua.specification.CountryFilterAdapter;
 
 @Service
-public class CountryServiceImpl implements CountryService{
+public class CountryServiceImpl implements CountryService {
 
 	@Autowired
 	private CountryRepository countryRepository;
-	
 
 	@Override
 	public List<Country> findAll() {
@@ -32,7 +31,7 @@ public class CountryServiceImpl implements CountryService{
 
 	@Override
 	public void delete(int id) {
-	countryRepository.delete(id);	
+		countryRepository.delete(id);
 	}
 
 	@Override
@@ -43,7 +42,7 @@ public class CountryServiceImpl implements CountryService{
 	@Override
 	public void save(Country country) {
 		countryRepository.save(country);
-		
+
 	}
 
 	@Override
@@ -53,14 +52,15 @@ public class CountryServiceImpl implements CountryService{
 
 	@Override
 	public Page<Country> findAll(Pageable pageable) {
-		
+
 		return countryRepository.findAll(pageable);
 	}
 
 	@Override
 	public Page<Country> findAll(CountryFilterForm form, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return countryRepository.findAll(new CountryFilterAdapter(form), pageable);
+
+		return countryRepository.findAll(new CountryFilterAdapter(form),
+				pageable);
 	}
 
 }

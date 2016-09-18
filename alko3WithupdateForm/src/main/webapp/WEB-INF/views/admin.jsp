@@ -22,7 +22,7 @@
 <a href="/admin/sex">Sex</a>
 <a href="/admin/size">Size</a>
 
-<a href="/admin/uzer">Uzer</a>
+<a href="/admin/adminUzer">Uzer</a>
 
 <hr>
 	
