@@ -14,8 +14,8 @@
 		<table>
 			<tr>
 				<td><select name="name">
-						<c:forEach items="${uzers}" var="uzer">
-							<option value="${uzer.name}">${uzer.name}</option>
+						<c:forEach items="${users}" var="user">
+							<option value="${user.name}">${user.name}</option>
 						</c:forEach>
 				</select></td>
 			</tr>
@@ -39,7 +39,7 @@
 		<c:forEach items="${korzinas}" var="korzina">
 			<tr>
 				<td>${korzina.id}</td>
-				<td>${korzina.uzer.name}</td>
+				<td>${korzina.user.name}</td>
 				<td>${korzina.item.title}</td>
 
 				<td><a href="/admin/korzina/delete/${korzina.id}">delete</a></td>

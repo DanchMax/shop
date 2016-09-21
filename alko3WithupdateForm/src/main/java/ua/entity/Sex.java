@@ -23,7 +23,7 @@ public class Sex {
 	
 	private String sex;
 	@OneToMany(mappedBy="sex")
-	private List<Uzer> uzers = new ArrayList<>();
+	private List<User> users = new ArrayList<>();
 	public int getId() {
 		return id;
 	}
@@ -31,11 +31,11 @@ public class Sex {
 		this.id = id;
 	}
 	
-	public List<Uzer> getUzers() {
-		return uzers;
+	public List<User> getUsers() {
+		return users;
 	}
-	public void setUzers(List<Uzer> uzers) {
-		this.uzers = uzers;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 	
 	public String getSex() {

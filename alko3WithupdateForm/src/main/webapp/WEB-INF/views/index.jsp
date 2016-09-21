@@ -1,17 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>Hello</h1>
-	<a href="/admin">Admin panel</a>
-	<hr>
-	<a href="/uzerPanel">Uzer panel</a>
-</body>
-</html>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
+
+<h1>Hello</h1>
+<security:authorize access="!isAuthenticated()">
+<a href="/registration">Register</a>
+</security:authorize>
+<security:authorize access="isAuthenticated() and hasRole('ROLE_ADMIN')">
+<a href="/admin">Admin panel</a>
+</security:authorize>

@@ -23,7 +23,7 @@ public class Role {
 	private String role;
 	
 	@OneToMany(mappedBy="role")
-	private List<Uzer> uzer;
+	private List<User> user;
 
 	public int getId() {
 		return id;
@@ -37,12 +37,12 @@ public class Role {
 	
 
 	
-	public List<Uzer> getUzer() {
-		return uzer;
+	public List<User> getUser() {
+		return user;
 	}
 
-	public void setUzer(List<Uzer> uzer) {
-		this.uzer = uzer;
+	public void setUser(List<User> user) {
+		this.user = user;
 	}
 
 	

@@ -203,6 +203,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="/WEB-INF/custom.tld" prefix="custom"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<script>
+$(function() {
+	$('select[name=country]').chosen();
+});
+</script>
 	<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-default">
@@ -214,10 +219,6 @@
 							<li><a href="/admin/country">Country</a></li>
 								<li class="active"><a href="/admin/item">Item</a><span
 										class="sr-only">(current)</span></li>
-								
-								
-								
-								
 								<li><a href="/admin/perman">Perman</a></li>
 								<li><a href="/admin/size">Size</a></li>
 							</ul>
@@ -243,10 +244,12 @@
 		<form:errors path="*"/>
 		<form:hidden path="id" />
 		<custom:hiddenInputs excludeParams="name, id, price"/>
+		
 			<div class="form-group">
-			<form:select path="brand" items="${brands}" itemLabel="brand" itemValue="id">
+			<form:select path="brand" items="${brands}" itemLabel="brand" itemValue="id" >
 				<option value="0">Brand</option>
 			</form:select>
+			
 			<form:select path="country" items="${countrys}" itemLabel="country" itemValue="id">
 				<option value="0">Country</option>
 			</form:select>

@@ -11,7 +11,7 @@ import ua.service.KorzinaService;
 import ua.service.PermanService;
 import ua.service.RoleService;
 import ua.service.SizeService;
-import ua.service.UzerService;
+import ua.service.UserService;
 
 @Controller
 public class AdminController {
@@ -34,6 +34,6 @@ public class AdminController {
 	private SizeService sizeService;
 
 	@Autowired
-	private UzerService uzerService;
+	private UserService userService;
 
 }

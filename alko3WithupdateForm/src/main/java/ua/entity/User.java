@@ -2,6 +2,8 @@ package ua.entity;
 
 
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -14,20 +16,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
-@Table(indexes={@Index(columnList="name"), @Index(columnList="login"), 
+@Table(indexes={@Index(columnList="login"), 
 		@Index(columnList="mail")})
-public class Uzer {
+public class User  implements UserDetails{
+
+		
+	
+	private static final long serialVersionUID = -8538242604832101912L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	private String name;
-	
+		
 	private String login;
 	
-	private String pass;
+	private String password;
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Sex sex;
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -35,7 +44,7 @@ public class Uzer {
 	
 	private String mail;
 	
-	@OneToMany(mappedBy="uzer")
+	@OneToMany(mappedBy="user")
     private List<Korzina> korzina;
 
 	public List<Korzina> getKorzina() {
@@ -54,14 +63,7 @@ public class Uzer {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	
 	public String getLogin() {
 		return login;
 	}
@@ -70,12 +72,12 @@ public class Uzer {
 		this.login = login;
 	}
 
-	public String getPass() {
-		return pass;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Sex getSex() {
@@ -102,4 +104,38 @@ public class Uzer {
 		this.mail = mail;
 	}
 
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority(role.getRole()));
+		authorities.add(new SimpleGrantedAuthority(sex.getSex()));
+		return authorities;
+	}
+
+	@Override
+	public String getUsername() {
+		return String.valueOf(id);
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	
 }

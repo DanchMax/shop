@@ -8,9 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>UZer</title>
 </head>
-<h2>Uzer menu</h2>
+<h2>User menu</h2>
 <body>
-	<form action="/admin/adminUzer" method="post">
+	<form action="/admin/adminUser" method="post">
 		<table>
 			<tr>
 				<td><select name="role">
@@ -36,28 +36,28 @@
 				<td><input name="login" placeholder="login"></td>
 			</tr>
 			<tr>
-				<td><input name="pass" placeholder="password"></td>
+				<td><input name="password" placeholder="password"></td>
 			</tr>
 			<tr>
 				<td><input name="mail" placeholder="email"></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Submit new uzer"></td>
+				<td><input type="submit" value="Submit new user"></td>
 			</tr>
 		</table>
 	</form>
 	<table>
 
-		<c:forEach items="${uzers}" var="uzer">
+		<c:forEach items="${users}" var="user">
 			<tr>
-				<td>${uzer.name}</td>
-				<td>${uzer.login}</td>
-				<td>${uzer.pass}</td>
-				<td>${uzer.sex}</td>
-				<td>${uzer.role}</td>
-				<td>${uzer.mail}</td>
-				<td><a href="/admin/adminUzer/delete/${uzer.id}">delete</a></td>
-				<td><a href="/admin/adminUzer/update/${uzer.id}">update</a></td>
+				
+				<td>${user.login}</td>
+				<td>${user.password}</td>
+				<td>${user.sex}</td>
+				<td>${user.role}</td>
+				<td>${user.mail}</td>
+				<td><a href="/admin/adminUser/delete/${user.id}">delete</a></td>
+				<td><a href="/admin/adminUser/update/${user.id}">update</a></td>
 			</tr>
 		</c:forEach>
 	</table>

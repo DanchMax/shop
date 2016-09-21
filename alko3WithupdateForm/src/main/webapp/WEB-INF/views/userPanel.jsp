@@ -7,13 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Uzer Panel</title>
+<title>User Panel</title>
 </head>
 <body>
 <h2>User panel</h2>
 
-<a href="/admin/uzerKorzina">uzer korzina</a>
-<a href="/admin/uzerItem">uzer Item</a>
+<a href="/admin/userKorzina">uzer korzina</a>
+<a href="/admin/userItem">uzer Item</a>
 
 
 	<a href="/index"> back to index</a>

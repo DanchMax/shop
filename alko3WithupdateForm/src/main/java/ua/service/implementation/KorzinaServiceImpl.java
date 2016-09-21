@@ -11,7 +11,7 @@ import ua.entity.Korzina;
 import ua.form.KorzinaFilterForm;
 import ua.repository.ItemRepository;
 import ua.repository.KorzinaRepository;
-import ua.repository.UzerRepository;
+import ua.repository.UserRepository;
 import ua.service.KorzinaService;
 import ua.specification.KorzinaFilterAdapter;
 
@@ -22,7 +22,7 @@ public class KorzinaServiceImpl implements KorzinaService {
 	@Autowired
 	private KorzinaRepository korzinaRepository;
 	@Autowired
-	private UzerRepository uzerRepository;
+	private UserRepository userRepository;
 	@Autowired
 	private ItemRepository itemRepository;
 

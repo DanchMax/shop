@@ -13,10 +13,10 @@ import ua.entity.Korzina;
 
 public interface KorzinaRepository extends JpaRepository<Korzina, Integer>, JpaSpecificationExecutor<Korzina> {
 
-	@Query("select uo from Korzina uo left join fetch uo.item left join fetch uo.uzer where uo.id=:id")
+	@Query("select uo from Korzina uo left join fetch uo.item left join fetch uo.user where uo.id=:id")
 	Korzina findById(@Param("id") int id);
 	
-	@Query("select uo from Korzina uo left join fetch uo.item left join fetch uo.uzer")
+	@Query("select uo from Korzina uo left join fetch uo.item left join fetch uo.user")
 	List<Korzina> korzinas();
 
 	@Modifying

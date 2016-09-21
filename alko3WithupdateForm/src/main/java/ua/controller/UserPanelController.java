@@ -9,7 +9,7 @@ import ua.service.ItemService;
 import ua.service.KorzinaService;
 
 @Controller
-public class UzerPanelController {
+public class UserPanelController {
 
 	@Autowired
 	private KorzinaService korzinaService;
@@ -17,9 +17,9 @@ public class UzerPanelController {
 	@Autowired
 	private ItemService itemService;
 
-	@RequestMapping("/uzerPanel/uzerItem")
+	@RequestMapping("/userPanel/userItem")
 	public String showProduct(Model model) {
 		model.addAttribute("items", itemService.items());
-		return "uzerItems";
+		return "userItems";
 	}
 }

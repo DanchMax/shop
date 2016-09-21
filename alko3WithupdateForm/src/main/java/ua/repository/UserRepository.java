@@ -9,21 +9,21 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import ua.entity.Uzer;
+import ua.entity.User;
 
-public interface UzerRepository extends JpaRepository<Uzer, Integer>, JpaSpecificationExecutor<Uzer> {
+public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
 
 	
-	Uzer findById(int id);
+	User findById(int id);
 	
-	Uzer findByName(String name);
+	User findByLogin(String login);
 
 	@Modifying
-	@Query("DELETE FROM Uzer u WHERE u.id=:id")
+	@Query("DELETE FROM User u WHERE u.id=:id")
 	@Transactional
 	void deleteById(@Param("id") int id);
 	
-	@Query("select u from Uzer u left join fetch u.role left join fetch u.sex")
-	List<Uzer> uzers();
+	@Query("select u from User u left join fetch u.role left join fetch u.sex")
+	List<User> users();
 	
 }

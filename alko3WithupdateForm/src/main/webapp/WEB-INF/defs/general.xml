@@ -68,14 +68,24 @@
 		<put-attribute name="body" value="/WEB-INF/views/korzina.jsp" />
 	</definition>
 
-	<definition name="adminUzer" extends="common">
+	<definition name="adminUser" extends="common">
 		<put-attribute name="title" value="admin" />
-		<put-attribute name="body" value="/WEB-INF/views/adminUzer.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/adminUser.jsp" />
 	</definition>
 
-	<definition name="uzerPanel" extends="common">
+	<definition name="userPanel" extends="common">
 		<put-attribute name="title" value="admin" />
-		<put-attribute name="body" value="/WEB-INF/views/uzerPanel.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/userPanel.jsp" />
+	</definition>
+	
+	<definition name="login" extends="common">
+		<put-attribute name="title" value="admin" />
+		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+	</definition>
+	
+	<definition name="registration" extends="common">
+		<put-attribute name="title" value="admin" />
+		<put-attribute name="body" value="/WEB-INF/views/registration.jsp" />
 	</definition>
 
 </tiles-definitions>

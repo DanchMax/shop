@@ -16,7 +16,7 @@ public class Korzina {
 	private int id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Uzer uzer;
+	private User user;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Item item;
@@ -29,12 +29,12 @@ public class Korzina {
 		this.id = id;
 	}
 
-	public Uzer getUzer() {
-		return uzer;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUzer(Uzer uzer) {
-		this.uzer = uzer;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Item getItem() {

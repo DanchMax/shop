@@ -1,5 +1,7 @@
 package ua.form;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import ua.entity.Brand;
 import ua.entity.Category;
 import ua.entity.Country;
@@ -26,6 +28,26 @@ public class ItemForm {
 	private Size size;
 
 	private Korzina korzina;
+
+	private int version;
+
+	private MultipartFile file;
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 
 	public int getId() {
 		return id;
