@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,7 +38,7 @@ public class User  implements UserDetails{
 	private String login;
 	
 	private String password;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@Enumerated
 	private Sex sex;
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Role role;
@@ -108,7 +109,7 @@ public class User  implements UserDetails{
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority(role.getRole()));
-		authorities.add(new SimpleGrantedAuthority(sex.getSex()));
+		authorities.add(new SimpleGrantedAuthority(sex.name()));
 		return authorities;
 	}
 
@@ -136,6 +137,7 @@ public class User  implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
+
 
 	
 }

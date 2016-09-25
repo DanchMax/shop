@@ -19,6 +19,8 @@ public interface UserService {
 	User findById(int id);
 	
 	User findByLogin(String login);
+	
+	User findByMail(String mail);
 
 	void delete(int id);
 

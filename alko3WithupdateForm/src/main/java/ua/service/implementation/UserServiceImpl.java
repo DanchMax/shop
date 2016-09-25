@@ -13,12 +13,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import ua.entity.Role;
 import ua.entity.Sex;
 import ua.entity.User;
 import ua.form.UserFilterForm;
 import ua.repository.RoleRepository;
-import ua.repository.SexRepository;
 import ua.repository.UserRepository;
 import ua.service.UserService;
 import ua.specification.UserFilterAdapter;
@@ -31,8 +29,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private SexRepository sexRepository;
+	
 	@Autowired
 	private RoleRepository roleRepository;
 
@@ -77,9 +74,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public void saveAdmin() {
 		User user = userRepository.findOne(1);
 		if (user == null) {
+			
 			user = new User();
-			user.getRole();
-			user.getSex();
+			user.setRole(roleRepository.findByRole("admin"));
+			user.setSex(Sex.SEX_MALE);
 			user.setPassword(encoder.encode("admin"));
 			user.setLogin("admin");
 			user.setId(1);
@@ -98,6 +96,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public User findByMail(String mail) {
+		// TODO Auto-generated method stub
+		return userRepository.findByMail(mail);
 	}
 
 }

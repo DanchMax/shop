@@ -17,13 +17,15 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
 	User findById(int id);
 	
 	User findByLogin(String login);
+	
+	User findByMail(String mail);
 
 	@Modifying
 	@Query("DELETE FROM User u WHERE u.id=:id")
 	@Transactional
 	void deleteById(@Param("id") int id);
 	
-	@Query("select u from User u left join fetch u.role left join fetch u.sex")
+	@Query("select u from User u left join fetch u.role")
 	List<User> users();
 	
 }
