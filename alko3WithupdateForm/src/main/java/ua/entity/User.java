@@ -8,12 +8,10 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -40,7 +38,7 @@ public class User  implements UserDetails{
 	private String password;
 	@Enumerated
 	private Sex sex;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@Enumerated
 	private Role role;
 	
 	private String mail;
@@ -108,7 +106,7 @@ public class User  implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(role.getRole()));
+		authorities.add(new SimpleGrantedAuthority(role.name()));
 		authorities.add(new SimpleGrantedAuthority(sex.name()));
 		return authorities;
 	}

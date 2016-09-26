@@ -20,8 +20,7 @@
 						<li><a href="/admin/item">Item</a></li>
 						<li><a href="/admin/korzina">Korzina</a></li>
 						<li><a href="/admin/perman">Perman</a></li>
-						<li><a href="/admin/role">Role</a></li>
-						<li><a href="/admin/sex">Sex</a></li>
+						
 						<li><a href="/admin/size">Size</a></li>
 
 						<li><a href="/admin/adminUser">User</a></li>

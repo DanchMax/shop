@@ -9,7 +9,6 @@ import ua.service.CountryService;
 import ua.service.ItemService;
 import ua.service.KorzinaService;
 import ua.service.PermanService;
-import ua.service.RoleService;
 import ua.service.SizeService;
 import ua.service.UserService;
 
@@ -28,8 +27,7 @@ public class AdminController {
 	private KorzinaService korzinaService;
 	@Autowired
 	private PermanService permanService;
-	@Autowired
-	private RoleService roleService;
+	
 	@Autowired
 	private SizeService sizeService;
 

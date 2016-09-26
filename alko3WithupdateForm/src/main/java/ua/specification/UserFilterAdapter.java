@@ -24,9 +24,9 @@ public class UserFilterAdapter implements Specification<User> {
 			CriteriaBuilder cb) {
 		if (query.getResultType() != Long.class
 				&& query.getResultType() != long.class) {
-			 root.fetch("role");
-			// root.fetch("measuringSystem");
-			 query.distinct(true);
+			 //root.fetch("role");
+			 //root.fetch("sex");
+			 //query.distinct(true);
 		}
 		Expression<String> exp = root.get("user");
 		return cb.like(cb.upper(exp), search.toUpperCase() + "%");

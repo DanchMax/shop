@@ -41,10 +41,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/perman.jsp" />
 	</definition>
 
-	<definition name="role" extends="common">
-		<put-attribute name="title" value="admin" />
-		<put-attribute name="body" value="/WEB-INF/views/role.jsp" />
-	</definition>
+	
 
 	
 

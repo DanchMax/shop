@@ -1,6 +1,7 @@
 package ua.service.implementation;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
 
@@ -13,10 +14,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import ua.entity.Role;
 import ua.entity.Sex;
 import ua.entity.User;
 import ua.form.UserFilterForm;
-import ua.repository.RoleRepository;
 import ua.repository.UserRepository;
 import ua.service.UserService;
 import ua.specification.UserFilterAdapter;
@@ -30,8 +31,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	private RoleRepository roleRepository;
+	
 
 	public List<User> findAll() {
 		return userRepository.findAll();
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		if (user == null) {
 			
 			user = new User();
-			user.setRole(roleRepository.findByRole("admin"));
+			user.setRole(Role.ROLE_ADMIN);
 			user.setSex(Sex.SEX_MALE);
 			user.setPassword(encoder.encode("admin"));
 			user.setLogin("admin");
@@ -92,16 +92,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String arg0)
+	public UserDetails loadUserByUsername(String login)
 			throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		if(Pattern.matches("^[0-9]{1,8}$", login)){
+			return userRepository.findOne(Integer.valueOf(login));
+		}
+		return userRepository.findByLogin(login);
 	}
 
 	@Override
 	public User findByMail(String mail) {
 		// TODO Auto-generated method stub
 		return userRepository.findByMail(mail);
+	}
+	
+	public void setRepository(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	public void setEncoder(BCryptPasswordEncoder encoder) {
+		this.encoder = encoder;
 	}
 
 }

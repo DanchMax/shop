@@ -25,7 +25,7 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
 	@Transactional
 	void deleteById(@Param("id") int id);
 	
-	@Query("select u from User u left join fetch u.role")
+	@Query("select u from User u WHERE u.id=:id")
 	List<User> users();
 	
 }
