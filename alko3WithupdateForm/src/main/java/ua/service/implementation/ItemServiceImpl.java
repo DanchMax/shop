@@ -2,6 +2,8 @@ package ua.service.implementation;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,15 +18,17 @@ import ua.repository.CountryRepository;
 import ua.repository.ItemRepository;
 import ua.repository.PermanRepository;
 import ua.repository.SizeRepository;
+import ua.service.FileWriter;
 import ua.service.ItemService;
 import ua.specification.ItemFilterAdapter;
 
 @Service
 public class ItemServiceImpl implements ItemService {
 
+	
 	@Autowired
 	private BrandRepository brandRepository;
-	@Autowired
+	@Resource
 	private ItemRepository itemRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -34,6 +38,8 @@ public class ItemServiceImpl implements ItemService {
 	private PermanRepository permanRepository;
 	@Autowired
 	private SizeRepository sizeRepository;
+	/*@Autowired
+	private FileWriter fileWriter;*/
 
 	public void save(ItemForm form) {
 		Item item = new Item();
@@ -45,7 +51,16 @@ public class ItemServiceImpl implements ItemService {
 		item.setPrice(Integer.parseInt(form.getPrice()));
 		item.setSize(form.getSize());
 		item.setName(form.getName());
-		itemRepository.save(item);
+		item.setId(form.getId());
+		item.setPath(form.getPath());
+		item.setVersion(form.getVersion());
+		itemRepository.saveAndFlush(item);
+		/*String extension = fileWriter.write(FileWriter.Folder.ITEM, form.getFile(), item.getId());
+		if(extension!=null){
+			item.setVersion(form.getVersion()+1);
+			item.setPath(extension);
+			itemRepository.save(item);
+		}*/
 
 	}
 
@@ -83,6 +98,8 @@ public class ItemServiceImpl implements ItemService {
 		form.setPrice(String.valueOf(item.getPrice()));
 		form.setSize(item.getSize());
 		form.setName(item.getName());
+		form.setPath(item.getPath());
+		form.setVersion(item.getVersion());
 		return form;
 	}
 

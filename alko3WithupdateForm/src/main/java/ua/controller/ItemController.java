@@ -139,6 +139,32 @@ public class ItemController {
 				if(order.getDirection()!=Direction.ASC)
 				buffer.append(",desc");
 			});
+			
+		}
+		
+		buffer.append("&min=");
+		buffer.append(form.getMin());
+		buffer.append("&max=");
+		buffer.append(form.getMax());
+		for(Integer i : form.getBrandIds()){
+			buffer.append("&brandIds=");
+			buffer.append(i.toString());
+		}
+		for(Integer i : form.getCountryIds()){
+			buffer.append("&countryIds=");
+			buffer.append(i.toString());
+		}
+		for(Integer i : form.getCategoryIds()){
+			buffer.append("&categoryIds=");
+			buffer.append(i.toString());
+		}
+		for(Integer i : form.getPermanIds()){
+			buffer.append("&permanIds=");
+			buffer.append(i.toString());
+		}
+		for(Integer i : form.getSizeIds()){
+			buffer.append("&sizeIds=");
+			buffer.append(i.toString());
 		}
 		return buffer.toString();
 	}

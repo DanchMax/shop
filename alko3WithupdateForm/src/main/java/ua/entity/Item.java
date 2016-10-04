@@ -8,9 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
-@Table(indexes={@Index(columnList="name"), @Index(columnList="price")})
+@Table(indexes = { @Index(columnList = "name"), @Index(columnList = "price") })
 public class Item {
 
 	@Id
@@ -20,6 +23,13 @@ public class Item {
 	private String name;
 
 	private int price;
+
+	private int version;
+
+	private String path;
+
+	@Transient
+	private MultipartFile file;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Brand brand;
@@ -105,6 +115,98 @@ public class Item {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
+		result = prime * result
+				+ ((category == null) ? 0 : category.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((korzina == null) ? 0 : korzina.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((perman == null) ? 0 : perman.hashCode());
+		result = prime * result + price;
+		result = prime * result + ((size == null) ? 0 : size.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (brand == null) {
+			if (other.brand != null)
+				return false;
+		} else if (!brand.equals(other.brand))
+			return false;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
+			return false;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
+			return false;
+		if (id != other.id)
+			return false;
+		if (korzina == null) {
+			if (other.korzina != null)
+				return false;
+		} else if (!korzina.equals(other.korzina))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (perman == null) {
+			if (other.perman != null)
+				return false;
+		} else if (!perman.equals(other.perman))
+			return false;
+		if (price != other.price)
+			return false;
+		if (size == null) {
+			if (other.size != null)
+				return false;
+		} else if (!size.equals(other.size))
+			return false;
+		return true;
 	}
 
 }

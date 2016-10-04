@@ -32,6 +32,16 @@ public class ItemForm {
 	private int version;
 
 	private MultipartFile file;
+	
+	private String path;
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
 
 	public int getVersion() {
 		return version;
@@ -64,6 +74,7 @@ public class ItemForm {
 	public void setPrice(String price) {
 		this.price = price;
 	}
+	
 
 	public Brand getBrand() {
 		return brand;

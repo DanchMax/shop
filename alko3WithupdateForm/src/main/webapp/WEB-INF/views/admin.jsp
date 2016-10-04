@@ -23,7 +23,7 @@
 						
 						<li><a href="/admin/size">Size</a></li>
 
-						<li><a href="/admin/adminUser">User</a></li>
+						<li><a href="/admin/userPanel">User</a></li>
 
 						<hr>
 

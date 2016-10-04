@@ -32,25 +32,73 @@ $(function() {
 			</div>
 		</div>
 		
-		<div class="row-fluid">
-		<div class="col-md-3">
-		<form:form action="/admin/item" class="form-inline" method="get" modelAttribute="filter">
-				<custom:hiddenInputs excludeParams="search"/>
+		<div class="col-md-3 col-xs-12">
+			<form:form action="/admin/item" class="form-inline" method="get" modelAttribute="filter">
+				<custom:hiddenInputs excludeParams="min, max, brandIds, countryIds,categoryIds, permanIds, sizeIds, _sizeIds, _permanIds, _categoryIds, _countryIds, _brandIds"/>
 				<div class="form-group">
-<%-- 					<form:input path="search" placeholder="search" class="form-control" /> --%>
+					<form:input path="min" placeholder="min" class="form-control"/>
+					<form:input path="max" placeholder="max" class="form-control"/>
+				</div>
+				
+				<div class="form-group">
+					<h4 id="b">Brand</h4>
+				</div>
+					<div class="form-group">
+					<form:checkboxes items="${brands}" path="brandIds" itemLabel="brand" itemValue="id" />
+				</div>
+				
+				
+				<div class="form-group">
+					<h4 id="b">Country</h4>
+				</div>
+				<div class="form-group">
+					<form:checkboxes items="${countrys}" path="countryIds" itemLabel="country" itemValue="id"/>
+				</div>
+				
+				<div class="form-group">
+					<h4 id="b">Category</h4>
+				</div>
+				<div class="form-group">
+					<form:checkboxes items="${categorys}" path="categoryIds" itemLabel="category" itemValue="id" />
+				</div>
+				
+				<div class="form-group">
+					<h4 id="b">Perman</h4>
+				</div>
+				<div class="form-group">
+					<form:checkboxes items="${permans}" path="permanIds" itemLabel="perman" itemValue="id" />
+				</div>
+				
+				<div class="form-group">
+					<h4 id="b">Size</h4>
+				</div>
+				<div class="form-group">
+					<form:checkboxes items="${sizes}" path="sizeIds" itemLabel="size" itemValue="id" />
+				</div>
+				
+				<div class="form-group">
 					<button type="submit" class="btn btn-primary">Ok</button>
 				</div>
 			</form:form>
-					</div>
+		</div>
+		
 		<div class="col-md-7">
-		
-		
-	<form:form action="/admin/item" method="post" modelAttribute="form" class="form-inline" >
+	<form:form action="/admin/item" method="post" modelAttribute="form" class="form-inline" enctype="multipart/form-data">
 		<form:errors path="*"/>
 		<form:hidden path="id" />
-		<custom:hiddenInputs excludeParams="name, id, price"/>
+		<form:hidden path="path" />
+		<form:hidden path="version" />
+		<custom:hiddenInputs excludeParams="name, id, price, brand, country, category, perman, size,  path, version,"/>
 		
 			<div class="form-group">
+			
+			<label for="name"><form:errors path="name"/></label>
+			<form:input path="name" id="name" class="form-control"  placeholder="Item name" />
+			
+			<label for="price"><form:errors path="price" /></label>
+			<form:input path="price" id="price" class="form-control" placeholder="00" />
+			
+			
 			<form:select path="brand" items="${brands}" itemLabel="brand" itemValue="id" >
 				<option value="0">Brand</option>
 			</form:select>
@@ -67,31 +115,35 @@ $(function() {
 			<form:select path="size" items="${sizes}" itemLabel="size" itemValue="id">
 				<option value="0">Size</option>
 			</form:select>
-			
-			<label for="name"><form:errors path="name"/></label>
-			<form:input path="name" id="name" class="form-control"  placeholder="Item name" />
-			
-			<label for="price"><form:errors path="price" /></label>
-			<form:input path="price" id="price" class="form-control" placeholder="00" />
-			
-			<button type="submit" class="btn btn-primary">Create Item</button>
+			<div class="form-group">
+				<label class="btn btn-default btn-file"> Browse <input
+					type="file" name="file" style="display: none;">
+				</label>
 			</div>
+				<button type="submit" class="btn btn-primary">Create Item</button>
+			</div>
+			
 	</form:form>
-	
-	
-	<div class="col-md-4"><h4>Item name</h4></div>
-	<div class="col-md-4"><h4>Delete</h4></div>
-	<div class="col-md-4"><h4>Update</h4></div>
+	<div class="row">
+	<div class="col-md-3"><h4>Image</h4></div>
+	<div class="col-md-3"><h4>Item name</h4></div>
+	<div class="col-md-3"><h4>Delete</h4></div>
+	<div class="col-md-3"><h4>Update</h4></div>
+	</div>
 		<c:forEach items="${page.content}" var="item">
-			<div class="col-md-4"><h4>${item.name}</h4></div>
-			<div class="col-md-4"><h4>${item.price}</h4></div>
-			<div class="col-md-4"><h4>${item.brand.brand}</h4></div>
-			<div class="col-md-4"><h4>${item.country.country}</h4></div>
-			<div class="col-md-4"><h4>${item.category.category}</h4></div>
-			<div class="col-md-4"><h4>${item.perman.perman}</h4></div>
-			<div class="col-md-4"><h4>${item.size.size}</h4></div>
-			<div class="col-md-4"><h4><a href="/admin/item/delete/${item.id}<custom:allParams/>">delete</a></h4></div>
-			<div class="col-md-4"><h4><a href="/admin/item/update/${item.id}<custom:allParams/>">update</a></h4></div>
+		<div class="row">
+		<div class="col-md-2"><img class="img-thumbnail" width="100" src="/images/item/${item.id}${item.path}?version=${item.version}" /></div>
+		
+			<div class="col-md-2"><h4>${item.name}</h4></div>
+			<div class="col-md-2"><h4>${item.price}</h4></div>
+			<div class="col-md-2"><h4>${item.brand.brand}</h4></div>
+			<div class="col-md-2"><h4>${item.country.country}</h4></div>
+			<div class="col-md-2"><h4>${item.category.category}</h4></div>
+			<div class="col-md-2"><h4>${item.perman.perman}</h4></div>
+			<div class="col-md-2"><h4>${item.size.size}</h4></div>
+			<div class="col-md-2"><h4><a href="/admin/item/delete/${item.id}<custom:allParams/>">delete</a></h4></div>
+			<div class="col-md-2"><h4><a href="/admin/item/update/${item.id}<custom:allParams/>">update</a></h4></div>
+			</div>
 		</c:forEach>
 		<div class="col-md-12 text-center">
 				<custom:pageable page="${page}" cell="<li></li>" container="<ul class='pagination'></ul>" />
