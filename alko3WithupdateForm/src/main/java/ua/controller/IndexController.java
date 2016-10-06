@@ -24,4 +24,9 @@ public class IndexController {
 	public String showLogin() {
 		return "login";
 	}
+	
+	@RequestMapping("/user")
+	public String showUser(){
+		return "userPanel";
+	}
 }

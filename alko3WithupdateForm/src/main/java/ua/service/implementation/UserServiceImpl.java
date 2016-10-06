@@ -49,6 +49,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public void save(User user) {
+		user.setRole(Role.ROLE_USER);
+		user.setSex(Sex.SEX_FEMALE);
 		user.setPassword(encoder.encode(user.getPassword()));
 		userRepository.save(user);
 	}

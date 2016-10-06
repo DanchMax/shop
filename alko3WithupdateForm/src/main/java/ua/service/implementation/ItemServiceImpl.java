@@ -38,8 +38,8 @@ public class ItemServiceImpl implements ItemService {
 	private PermanRepository permanRepository;
 	@Autowired
 	private SizeRepository sizeRepository;
-	/*@Autowired
-	private FileWriter fileWriter;*/
+	@Autowired
+	private FileWriter fileWriter;
 
 	public void save(ItemForm form) {
 		Item item = new Item();
@@ -55,12 +55,12 @@ public class ItemServiceImpl implements ItemService {
 		item.setPath(form.getPath());
 		item.setVersion(form.getVersion());
 		itemRepository.saveAndFlush(item);
-		/*String extension = fileWriter.write(FileWriter.Folder.ITEM, form.getFile(), item.getId());
+		String extension = fileWriter.write(FileWriter.Folder.ITEM, form.getFile(), item.getId());
 		if(extension!=null){
 			item.setVersion(form.getVersion()+1);
 			item.setPath(extension);
 			itemRepository.save(item);
-		}*/
+		}
 
 	}
 

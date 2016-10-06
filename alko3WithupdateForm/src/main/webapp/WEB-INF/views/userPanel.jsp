@@ -12,8 +12,8 @@
 <body>
 <h2>User panel</h2>
 
-<a href="/admin/userKorzina">uzer korzina</a>
-<a href="/admin/userItem">uzer Item</a>
+<a href="/admin/userKorzina">user korzina</a>
+<a href="/admin/userItem">user Item</a>
 
 
 	<a href="/index"> back to index</a>

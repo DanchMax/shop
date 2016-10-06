@@ -3,10 +3,11 @@ package ua.service.implementation;
 import java.io.File;
 import java.io.IOException;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import ua.service.FileWriter;
-
+@Service
 public class FileWriterImpl implements FileWriter{
 
 	@Override

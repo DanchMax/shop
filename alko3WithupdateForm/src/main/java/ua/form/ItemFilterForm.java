@@ -4,12 +4,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import ua.entity.Brand;
-import ua.entity.Category;
-import ua.entity.Country;
-import ua.entity.Perman;
-import ua.entity.Size;
-
 public class ItemFilterForm {
 
 	private String search = "";
@@ -24,12 +18,12 @@ public class ItemFilterForm {
 
 	private static final Pattern p = Pattern.compile("^[0-9]{1,9}$");
 
-	private List<Brand> brandIds = new ArrayList<>();
+	private List<Integer> brandIds = new ArrayList<>();
 
-	private List<Country> countryIds = new ArrayList<>();
-	private List<Category> categoryIds = new ArrayList<>();
-	private List<Perman> permanIds = new ArrayList<>();
-	private List<Size> sizeIds = new ArrayList<>();
+	private List<Integer> countryIds = new ArrayList<>();
+	private List<Integer> categoryIds = new ArrayList<>();
+	private List<Integer> permanIds = new ArrayList<>();
+	private List<Integer> sizeIds = new ArrayList<>();
 
 	public String getMin() {
 		return min;
@@ -65,43 +59,43 @@ public class ItemFilterForm {
 		this.maxInt = maxInt;
 	}
 
-	public List<Brand> getBrandIds() {
+	public List<Integer> getBrandIds() {
 		return brandIds;
 	}
 
-	public void setBrandIds(List<Brand> brandIds) {
+	public void setBrandIds(List<Integer> brandIds) {
 		this.brandIds = brandIds;
 	}
 
-	public List<Country> getCountryIds() {
+	public List<Integer> getCountryIds() {
 		return countryIds;
 	}
 
-	public void setCountryIds(List<Country> countryIds) {
+	public void setCountryIds(List<Integer> countryIds) {
 		this.countryIds = countryIds;
 	}
 
-	public List<Category> getCategoryIds() {
+	public List<Integer> getCategoryIds() {
 		return categoryIds;
 	}
 
-	public void setCategoryIds(List<Category> categoryIds) {
+	public void setCategoryIds(List<Integer> categoryIds) {
 		this.categoryIds = categoryIds;
 	}
 
-	public List<Perman> getPermanIds() {
+	public List<Integer> getPermanIds() {
 		return permanIds;
 	}
 
-	public void setPermanIds(List<Perman> permanIds) {
+	public void setPermanIds(List<Integer> permanIds) {
 		this.permanIds = permanIds;
 	}
 
-	public List<Size> getSizeIds() {
+	public List<Integer> getSizeIds() {
 		return sizeIds;
 	}
 
-	public void setSizeIds(List<Size> sizeIds) {
+	public void setSizeIds(List<Integer> sizeIds) {
 		this.sizeIds = sizeIds;
 	}
 	
