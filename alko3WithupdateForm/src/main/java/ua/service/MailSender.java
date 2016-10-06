@@ -20,7 +20,7 @@ public class MailSender {
 
 
 	private final static String USERNAME = "logoser87@gmail.com";
-    private final static String PASSWORD = "belkor13";
+    private final static String PASSWORD = "b*******";
     @Async
     public void sendMail(String content, String email, String mailBody) {
         Properties properties = System.getProperties();
