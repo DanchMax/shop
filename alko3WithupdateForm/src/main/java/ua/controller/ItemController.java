@@ -169,4 +169,16 @@ public class ItemController {
 		}
 		return buffer.toString();
 	}
+	
+	@RequestMapping("/user/item")
+	public String showItemForUser(Model model, @PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value="filter") ItemFilterForm form){
+		model.addAttribute("page", itemService.findAll(form, pageable));
+		model.addAttribute("countrys", countryService.findAll());
+		model.addAttribute("brands", brandService.findAll());
+		model.addAttribute("categorys", categoryService.findAll());
+		model.addAttribute("permans", permanService.findAll());
+		model.addAttribute("sizes", sizeService.findAll());
+		return "userItem";
+	}
 }

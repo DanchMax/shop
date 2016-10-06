@@ -23,8 +23,7 @@ public class AdminController {
 	private CountryService countryService;
 	@Autowired
 	private ItemService itemService;
-	@Autowired
-	private KorzinaService korzinaService;
+	
 	@Autowired
 	private PermanService permanService;
 	

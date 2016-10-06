@@ -9,7 +9,9 @@
 </security:authorize>
 <security:authorize access="isAuthenticated() and hasRole('ROLE_ADMIN')">
 <a href="/admin">Admin panel</a>
-
+</security:authorize>
+<security:authorize access="isAuthenticated() and hasRole('ROLE_USER')">
+<div><a href="/user/userItem">Item</a></div>
 </security:authorize>
 
 

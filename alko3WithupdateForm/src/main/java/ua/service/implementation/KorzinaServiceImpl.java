@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.entity.Korzina;
 import ua.form.KorzinaFilterForm;
@@ -21,10 +22,7 @@ public class KorzinaServiceImpl implements KorzinaService {
 
 	@Autowired
 	private KorzinaRepository korzinaRepository;
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private ItemRepository itemRepository;
+	
 
 	@Override
 	public Korzina findById(int id) {
@@ -42,7 +40,13 @@ public class KorzinaServiceImpl implements KorzinaService {
 	}
 
 	@Override
-	public void save(Korzina korzina) {
+	@Transactional
+	public void save(Korzina form) {
+		Korzina korzina = new Korzina();
+		korzina.setUser(form.getUser());
+		
+		korzina.setId(form.getId());
+		korzina.setItem(form.getItem());
 			korzinaRepository.save(korzina);			
 		}
 

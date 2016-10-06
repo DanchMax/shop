@@ -18,12 +18,12 @@
 						<li><a href="/admin/category">Category</a></li>
 						<li><a href="/admin/country">Country</a></li>
 						<li><a href="/admin/item">Item</a></li>
-						<li><a href="/admin/korzina">Korzina</a></li>
+						
 						<li><a href="/admin/perman">Perman</a></li>
 						
 						<li><a href="/admin/size">Size</a></li>
 
-						<li><a href="/admin/userPanel">User</a></li>
+						<li><a href="/user/userPanel">User</a></li>
 
 						<hr>
 

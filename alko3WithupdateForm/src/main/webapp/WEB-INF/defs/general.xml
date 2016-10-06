@@ -24,7 +24,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/country.jsp" />
 	</definition>
 
-
+<definition name="userItem" extends="common">
+		<put-attribute name="title" value="admin" />
+		<put-attribute name="body" value="/WEB-INF/views/userItem.jsp" />
+	</definition>
 
 	<definition name="brand" extends="common">
 		<put-attribute name="title" value="brand" />
